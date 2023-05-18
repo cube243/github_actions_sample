@@ -6,7 +6,7 @@ on:
 
 jobs:
   release:
-    runs-on: windows-latest
+    runs-on: linux-latest
 
     steps:
       - name: Checkout Repository
@@ -19,7 +19,7 @@ jobs:
         run: pyinstaller ./example.py --onefile
 
       - name: Create zip file
-        run: zip ./archive.zip ./dist/example manual.txt サンプル.tiff settings.json
+        run: zip -j ./archive.zip ./dist/example manual.txt サンプル.tiff settings.json
 
       - name: Release
         uses: actions/create-release@v1.0.0
