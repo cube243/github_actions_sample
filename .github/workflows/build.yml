@@ -37,18 +37,6 @@ jobs:
           tag_name=$(echo "${{ github.ref }}" | sed 's/refs\/tags\///')
           echo "::set-output name=tag_name::${tag_name}"
 
-      - name: Upload ZIP Archive
-        uses: actions/upload-artifact@v2
-        with:
-          name: Owl-${{ steps.extract_tag.outputs.tag_name }}.zip
-          path: ./archive.zip
-
-      - name: Attach ZIP to Release
-        uses: actions/download-artifact@v2
-        with:
-          name: Owl-${{ steps.extract_tag.outputs.tag_name }}.zip
-          path: ./archive.zip
-
       - name: Upload zip file
         id: upload-release-asset
         uses: actions/upload-release-asset@v1.0.1
