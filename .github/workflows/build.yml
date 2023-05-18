@@ -31,16 +31,20 @@ jobs:
           draft: false
           prerelease: false
 
+      - name: Extract tag name
+        id: extract_tag
+        run: echo "::set-output name=tag_name::${{ github.ref/refs\/tags\// }}"
+
       - name: Upload ZIP Archive
         uses: actions/upload-artifact@v2
         with:
-          name: Owl-${{ github.ref/refs\/tags\// }}.zip
+          name: Owl-${{ steps.extract_tag.outputs.tag_name }}.zip
           path: ./archive.zip
 
       - name: Attach ZIP to Release
         uses: actions/download-artifact@v2
         with:
-          name: Owl-${{ github.ref/refs\/tags\// }}.zip
+          name: Owl-${{ steps.extract_tag.outputs.tag_name }}.zip
           path: ./archive.zip
 
       - name: Upload zip file
@@ -50,6 +54,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_name: Owl-${{ github.ref/refs\/tags\// }}.zip
+          asset_name: Owl-${{ steps.extract_tag.outputs.tag_name }}.zip
           asset_path: ./archive.zip
           asset_content_type: application/zip
