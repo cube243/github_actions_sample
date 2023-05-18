@@ -33,7 +33,9 @@ jobs:
 
       - name: Extract tag name
         id: extract_tag
-        run: echo "::set-output name=tag_name::${{ github.ref/refs\/tags\// }}"
+        run: |
+          tag_name=$(echo "${{ github.ref }}" | sed 's/refs\/tags\///')
+          echo "::set-output name=tag_name::${tag_name}"
 
       - name: Upload ZIP Archive
         uses: actions/upload-artifact@v2
