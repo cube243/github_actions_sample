@@ -34,13 +34,13 @@ jobs:
       - name: Upload ZIP Archive
         uses: actions/upload-artifact@v2
         with:
-          name: Owl-${{ github.ref/ref\/tags\// }}.zip
+          name: Owl-${{ github.ref/refs\/tags\// }}.zip
           path: ./archive.zip
 
       - name: Attach ZIP to Release
         uses: actions/download-artifact@v2
         with:
-          name: Owl-${{ github.ref/ref\/tags\// }}.zip
+          name: Owl-${{ github.ref/refs\/tags\// }}.zip
           path: ./archive.zip
 
       - name: Upload zip file
@@ -50,6 +50,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_name: Owl-${{ github.ref/ref\/tags\// }}.zip
+          asset_name: Owl-${{ github.ref/refs\/tags\// }}.zip
           asset_path: ./archive.zip
           asset_content_type: application/zip
