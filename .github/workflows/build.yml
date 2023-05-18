@@ -19,7 +19,7 @@ jobs:
         run: pyinstaller ./example.py --onefile
 
       - name: Create zip file
-        run: zip Owl-${{ github.ref }}.zip manual.txt サンプル.tiff settings.json
+        run: zip ./archive.zip manual.txt サンプル.tiff settings.json
 
       - name: Release
         uses: actions/create-release@v1.0.0
@@ -35,13 +35,13 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Owl-${{ github.ref }}.zip
-          path: ./Owl-${{ github.ref }}.zip
+          path: ./archive.zip
 
       - name: Attach ZIP to Release
         uses: actions/download-artifact@v2
         with:
           name: Owl-${{ github.ref }}.zip
-          path: ./Owl-${{ github.ref }}.zip
+          path: ./archive.zip
 
       - name: Upload zip file
         id: upload-release-asset
@@ -50,6 +50,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./Owl-${{ github.ref }}.zip
           asset_name: Owl-${{ github.ref }}.zip
+          asset_path: ./archive.zip
           asset_content_type: application/zip
