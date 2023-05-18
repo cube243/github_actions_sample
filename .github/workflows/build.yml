@@ -19,7 +19,7 @@ jobs:
         run: pyinstaller ./example.py --onefile
 
       - name: Create zip file
-        run: Compress-Archive -Path .\dist\example, .\manual.txt, .\サンプル.tiff, .\settings.json -DestinationPath .\archive.zip
+        run: Compress-Archive -Path .\dist\example.exec, .\manual.txt, .\サンプル.tiff, .\settings.json -DestinationPath .\archive.zip
 
       - name: Release
         uses: actions/create-release@v1.0.0
