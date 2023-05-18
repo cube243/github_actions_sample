@@ -23,6 +23,7 @@ jobs:
 
       - name: Release
         uses: actions/create-release@v1.0.0
+        id: create_release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
