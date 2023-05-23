@@ -19,6 +19,7 @@ jobs:
         run: python -m pip install pyinstaller==5.9.0
       
       - name: Build and create zip file
+        shell: powershell
         run: |
           .\build.bat
       
