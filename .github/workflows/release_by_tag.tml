@@ -1,4 +1,4 @@
-name: release tag
+name: Release by tag
 on:
   push:
     tags:
@@ -20,8 +20,8 @@ jobs:
       
       - name: Build and create zip file
         run: |
-          .\build.bat
-      
+          .\release_by_tag.bat
+
       - name: Release
         uses: actions/create-release@v1.0.0
         id: create_release
@@ -47,5 +47,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_name: Owl-${{ steps.extract_tag.outputs.tag_name }}.zip
-          asset_path: .\archive.zip
+          asset_path: .\owl.zip
           asset_content_type: application/zip
