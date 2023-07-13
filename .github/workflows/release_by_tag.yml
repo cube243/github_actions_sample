@@ -40,6 +40,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          files: .\owl.zip
+          files: owl.zip
           name: Owl-${{ steps.extract_tag.outputs.tag_name }}.zip
     
