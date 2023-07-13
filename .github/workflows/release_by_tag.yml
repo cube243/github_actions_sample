@@ -37,7 +37,8 @@ jobs:
         id: extract_tag
         run: |
           $tag_name = $env:GITHUB_REF -replace "refs/tags/", ""
-          Write-Host "::set-output name=tag_name::$tag_name"
+          #Write-Host "::set-output name=tag_name::$tag_name"
+          Write-Host "tag_name=$tag_name" >> $GITHUB_OUTPUT
           
       - name: Upload zip file
         id: upload-release-asset
