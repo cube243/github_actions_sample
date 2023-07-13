@@ -27,9 +27,6 @@ jobs:
         id: create_release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag: ${{ github.ref }}
-          name: ${{ github.ref }}
 
       - name: Extract tag name
         id: extract_tag
