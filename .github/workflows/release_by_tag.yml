@@ -32,7 +32,9 @@ jobs:
         id: extract_tag
         run: |
           $tag_name = $env:GITHUB_REF -replace "refs/tags/", ""
-          Write-Output "tag_name=$tag_name" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          $file_name = "Owl-${tag_name}.zip"
+          Move-Item -Path ".\owl.zip" -Destination ".\{file_name}"
+          Write-Output "file_name=$file_name" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
       - name: Upload zip file
         id: upload-release-asset
@@ -40,6 +42,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          files: owl.zip
-          name: Owl-${{ steps.extract_tag.outputs.tag_name }}.zip
+          files: ${{ steps.extract_tag.outputs.file_name }}
     
