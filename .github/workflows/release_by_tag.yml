@@ -37,7 +37,7 @@ jobs:
         id: extract_tag
         run: |
           $tag_name = $env:GITHUB_REF -replace "refs/tags/", ""
-          echo "tag_name=$(echo $tag_name)" >> $GITHUB_ENV
+          Write-Host "tag_name=$tag_name" >> $GITHUB_OUTPUT
 
       - name: Upload zip file
         id: upload-release-asset
@@ -46,6 +46,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_name: Owl-${{ env.tag_name }}.zip
+          asset_name: Owl-${{ steps.extract_tag.outputs.tag_name }}.zip
           asset_path: .\owl.zip
           asset_content_type: application/zip
