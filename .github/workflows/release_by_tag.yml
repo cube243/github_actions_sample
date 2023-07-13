@@ -28,10 +28,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }}
-          draft: false
-          prerelease: false
+          tag: ${{ github.ref }}
+          name: ${{ github.ref }}
 
       - name: Extract tag name
         id: extract_tag
